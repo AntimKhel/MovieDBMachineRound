@@ -1,10 +1,14 @@
 package com.local.moviedb.ui.theme.screen
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -24,10 +28,16 @@ fun MovieDetailScreen(
     }
 
     Scaffold(
-        topBar = TopAppBar(
-            navigationIcon = onBackPress
-        ) {
-            // Composable
+        topBar = {
+            TopAppBar(
+                title = { Text(text = "") },
+                navigationIcon = {
+                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = null,
+                    modifier = Modifier.clickable {
+                        onBackPress.invoke()
+                    })
+                }
+            )
         }
     ) {
         AnimatedVisibility(visible = viewModel.isLoading.value) {
